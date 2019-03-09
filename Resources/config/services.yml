@@ -1,0 +1,37 @@
+services:
+
+    pts_user.create.command:
+        class: PlumTreeSystems\UserBundle\Command\CreateUserCommand
+        tags: ['console.command']
+
+    pts_user.listener:
+        class: PlumTreeSystems\UserBundle\Listener\UserListener
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: PlumTreeSystems\UserBundle\Entity\User, event: prePersist }
+            - { name: doctrine.orm.entity_listener, entity: PlumTreeSystems\UserBundle\Entity\User, event: preUpdate }
+        arguments: ['@security.password_encoder']
+
+    pts_user.manager:
+        public: true
+        class: PlumTreeSystems\UserBundle\Service\UserManager
+        arguments: ['@doctrine.orm.entity_manager', '%pts_user_class%', '@pts_user.jwt.manager']
+
+    pts_user.provider:
+        class: PlumTreeSystems\UserBundle\Service\UserProvider
+        arguments: ['%pts_user_class%', '@pts_user.manager']
+
+    pts_user.token.provider:
+        class: PlumTreeSystems\UserBundle\Security\TokenUserProvider
+        arguments: ['%pts_user_class%', '@pts_user.manager']
+
+    pts_user.jwt.manager:
+        public: true
+        class: PlumTreeSystems\UserBundle\Service\JWTManager
+
+    pts_user.security.checker:
+        class: PlumTreeSystems\UserBundle\Security\UserChecker
+
+    pts_user.jwt.authenticator:
+        class: PlumTreeSystems\UserBundle\Security\JWTAuthenticator
+        arguments: ['@pts_user.jwt.manager']
+

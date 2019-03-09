@@ -1,0 +1,19 @@
+PlumTreeSystems\UserBundle\Entity\TokenUser:
+    type: mappedSuperclass
+    table: pts_user
+    repositoryClass: PlumTreeSystems\UserBundle\Repository\TokenUserRepository
+    fields:
+        tempTokenType:
+            type: string
+            length: 255
+            nullable: true
+        tempToken:
+            type: string
+            length: 191
+            unique: true
+            nullable: true
+        tempTokenCreationDate:
+            type: datetime
+            lenght: 255
+            nullable: true
+    lifecycleCallbacks: {  }

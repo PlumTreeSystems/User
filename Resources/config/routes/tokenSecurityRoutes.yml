@@ -1,0 +1,3 @@
+token:
+    path:     /token
+    defaults: { _controller: PTSUser:TokenSecurityUser:createToken }

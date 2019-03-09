@@ -1,0 +1,7 @@
+login:
+    path:     /login
+    defaults: { _controller: PlumTreeSystems\UserBundle\Controller\SecurityUserController::loginAction }
+
+logout:
+    path:     /logout
+    defaults: { _controller: PlumTreeSystems\UserBundle\Controller\SecurityUserController::logoutAction }
