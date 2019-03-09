@@ -42,7 +42,7 @@ Create a configuration for the bundle
 ```yaml
 #config/packages/pts_user_bundle.yaml
 
-pts_user:
+plum_tree_systems_user:
     user_class: <classname of the class that extends one of the abstract classes>
 ```
 
@@ -50,7 +50,7 @@ Import the routes
 
 ```yaml
 #config/routes.yaml
-pts_user:
+plum_tree_systems_user:
     resource: "@PlumTreeSystems/UserBundle/Resources/config/routes/securityRoutes.yml"
     prefix:   /
 ```
@@ -77,11 +77,33 @@ Add this user class to the `config/packages/pts_user_bundle.yaml` configuration 
 ```yaml
 #config/packages/pts_user_bundle.yaml
 
-pts_user:
+plum_tree_systems_user:
     user_class: 'App\Entity\User'
 ```
 
-### Step 3: Create a user instance
+### Step 3: Edit the security configuration
+Add the security provider and encoder
+```yaml
+#config/packages/security.yaml
+
+security:
+    #...
+    providers:
+        ptsuser:
+            id: pts.user.provider
+    #...
+    encoders:
+        App\Entity\User: bcrypt
+    # optionally add the user checker to the firewalls where you will be using the authentication to handle disabled users
+    firewalls:
+    #...
+        main:
+    #...
+            user_checker: pts_user.security.checker
+    #...
+```
+
+### Step 4: Create a user instance
 If the extended user does not bring any additional fields, the create user command can be used `php bin/console pts:user:create`
 
 *note: when implementing own user, and not overriding password creation flow, use the `$user->setPlainPassword('1234')` method to automatically encode it prior to persisting it to the database*
