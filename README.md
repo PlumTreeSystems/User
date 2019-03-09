@@ -1,6 +1,6 @@
 Description
 ===========
-This is bundle, that extends the symfony user, without adding too many unnecessary features.
+This is a Symfony bundle, that extends the symfony user, without adding too many unnecessary features.
 
 Installation
 ============
