@@ -11,9 +11,9 @@ namespace PlumTreeSystems\UserBundle\Controller;
 use PlumTreeSystems\UserBundle\Entity\User;
 use PlumTreeSystems\UserBundle\Exception\LoginTimedOutException;
 use PlumTreeSystems\UserBundle\Model\TimeoutableInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-abstract class AbstractUserController extends Controller
+abstract class AbstractUserController extends AbstractController
 {
     protected function failLogin(User $user)
     {
