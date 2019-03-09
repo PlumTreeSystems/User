@@ -51,7 +51,7 @@ Import the routes
 ```yaml
 #config/routes.yaml
 plum_tree_systems_user:
-    resource: "@PlumTreeSystems/UserBundle/Resources/config/routes/securityRoutes.yml"
+    resource: "@PlumTreeSystemsUserBundle/Resources/config/routes/securityRoutes.yml"
     prefix:   /
 ```
 
@@ -90,7 +90,7 @@ security:
     #...
     providers:
         ptsuser:
-            id: pts.user.provider
+            id: pts_user.provider
     #...
     encoders:
         App\Entity\User: bcrypt

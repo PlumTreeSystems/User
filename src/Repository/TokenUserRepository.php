@@ -8,8 +8,6 @@
 
 namespace PlumTreeSystems\UserBundle\Repository;
 
-use PlumTreeSystems\UserBundle\Entity\TokenUser;
-
 class TokenUserRepository extends \Doctrine\ORM\EntityRepository
 {
 //    public function getByToken($token)
