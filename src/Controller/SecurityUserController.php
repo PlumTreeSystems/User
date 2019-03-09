@@ -22,7 +22,7 @@ class SecurityUserController extends AbstractUserController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('@PlumTreeSystemsUserBundle/security/login.html.twig', [
+        return $this->render('@PlumTreeSystemsUserBundle/views/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
