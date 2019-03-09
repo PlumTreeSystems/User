@@ -1,7 +1,7 @@
 {
     "name": "plumtreesystems/user-bundle",
     "type": "symfony-bundle",
-    "description": "This is bundle, that extends the symfony user, without adding too many unnecessary features.",
+    "description": "This is a Symfony bundle, that extends the symfony user, without adding too many unnecessary features.",
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
