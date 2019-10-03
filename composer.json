@@ -5,13 +5,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
-        "symfony/console": "4.2.*",
-        "symfony/form": "^4.2",
+        "symfony/console": "4.3.*",
+        "symfony/form": "4.3.*",
         "symfony/orm-pack": "*",
-        "symfony/security-bundle": "4.2.*",
+        "symfony/security-bundle": "4.3.*",
         "symfony/serializer-pack": "*",
-        "symfony/twig-bundle": "4.2.*",
-        "symfony/validator": "^4.2"
+        "symfony/twig-bundle": "4.3.*",
+        "symfony/validator": "4.3.*"
     },
     "require-dev": {
         "symfony/test-pack": "*"
@@ -30,6 +30,12 @@
     "autoload-dev": {
         "psr-4": {
             "PlumTreeSystems\\UserBundle\\Tests\\": "Tests/"
+        }
+    },
+    "extra": {
+        "symfony": {
+             "allow-contrib": false,
+             "require": "4.3.*"
         }
     }
 }
