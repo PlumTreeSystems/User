@@ -1,12 +1,12 @@
 <?php
-namespace App\Service;
+namespace PlumTreeSystems\UserBundle\Service;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 
 class FormErrorExtractor
 {
-    public function getErrorMessages(Form $form)
+    public static function getErrorMessages(Form $form)
     {
         $errors = [];
 

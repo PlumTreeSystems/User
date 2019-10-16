@@ -9,7 +9,7 @@
 namespace PlumTreeSystems\UserBundle\Controller;
 
 use PlumTreeSystems\UserBundle\Model\TokenizeableInterface;
-use App\Service\FormErrorExtractor;
+use PlumTreeSystems\UserBundle\Service\FormErrorExtractor;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormError;
@@ -66,6 +66,6 @@ class TokenSecurityUserController extends AbstractUserController
                 $this->failLogin($user);
             }
         }
-        return new JsonResponse($this->get(FormErrorExtractor::class)->getErrorMessages($form), 400);
+        return new JsonResponse(FormErrorExtractor::getErrorMessages($form), 400);
     }
 }
