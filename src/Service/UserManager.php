@@ -74,6 +74,8 @@ class UserManager
         }
         $this->em->persist($user);
         $this->em->flush();
+        
+        return $user;
     }
 
     public function updatePassword($email, $password)
