@@ -35,3 +35,6 @@ services:
         class: PlumTreeSystems\UserBundle\Security\JWTAuthenticator
         arguments: ['@pts_user.jwt.manager']
 
+    PlumTreeSystems\UserBundle\Controller\TokenSecurityController:
+        class: PlumTreeSystems\UserBundle\Controller\TokenSecurityController
+

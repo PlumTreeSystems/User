@@ -10,6 +10,7 @@ namespace PlumTreeSystems\UserBundle\Controller;
 
 use PlumTreeSystems\UserBundle\Model\TokenizeableInterface;
 use PlumTreeSystems\UserBundle\Service\FormErrorExtractor;
+use PlumTreeSystems\UserBundle\Service\JWTManager;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormError;
@@ -23,7 +24,8 @@ class TokenSecurityUserController extends AbstractUserController
 {
     public function createTokenAction(
         Request $request,
-        UserPasswordEncoderInterface $encoder
+        UserPasswordEncoderInterface $encoder,
+        JWTManager $jwtManager
     ) {
 
         $form = $this->createFormBuilder()
@@ -54,7 +56,7 @@ class TokenSecurityUserController extends AbstractUserController
                 /**
                  * @var $user TokenizeableInterface
                  */
-                $token = $this->get('pts_user.jwt.manager')->createToken($user);
+                $token = $jwtManager->createToken($user);
                 $response = [
                     'token' => $token,
                 ];
