@@ -11,6 +11,7 @@ namespace PlumTreeSystems\UserBundle\Controller;
 use PlumTreeSystems\UserBundle\Model\TokenizeableInterface;
 use PlumTreeSystems\UserBundle\Service\FormErrorExtractor;
 use PlumTreeSystems\UserBundle\Service\JWTManager;
+use PlumTreeSystems\UserBundle\Service\UserManager;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormError;
@@ -25,7 +26,8 @@ class TokenSecurityUserController extends AbstractUserController
     public function createTokenAction(
         Request $request,
         UserPasswordEncoderInterface $encoder,
-        JWTManager $jwtManager
+        JWTManager $jwtManager,
+        UserManager $userManager
     ) {
 
         $form = $this->createFormBuilder()
@@ -42,7 +44,6 @@ class TokenSecurityUserController extends AbstractUserController
         $form->submit($request->request->all());
         if ($form->isValid()) {
             $email = $form->get('email')->getData();
-            $userManager = $this->get('pts_user.manager');
             $user = $userManager->loadUserByUsername($email);
             if ($user) {
                 try {

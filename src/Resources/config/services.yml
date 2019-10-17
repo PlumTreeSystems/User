@@ -16,6 +16,9 @@ services:
         class: PlumTreeSystems\UserBundle\Service\UserManager
         arguments: ['@doctrine.orm.entity_manager', '%pts_user_class%', '@pts_user.jwt.manager']
 
+    PlumTreeSystems\UserBundle\Service\UserManager:
+        alias: pts_user.manager
+
     pts_user.provider:
         class: PlumTreeSystems\UserBundle\Service\UserProvider
         arguments: ['%pts_user_class%', '@pts_user.manager']
@@ -38,6 +41,6 @@ services:
     PlumTreeSystems\UserBundle\Service\JWTManager:
         alias: pts_user.jwt.manager
 
-    PlumTreeSystems\UserBundle\Controller\TokenSecurityController:
-        class: PlumTreeSystems\UserBundle\Controller\TokenSecurityController
+#    PlumTreeSystems\UserBundle\Controller\TokenSecurityController:
+#        class: PlumTreeSystems\UserBundle\Controller\TokenSecurityController
 
