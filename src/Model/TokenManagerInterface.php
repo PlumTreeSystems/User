@@ -13,4 +13,5 @@ interface TokenManagerInterface
     public function createToken(TokenizeableInterface $user): string;
     public function isValid(string $token): bool;
     public function getPayload(string $token);
+    public function isExpired(string $token): bool;
 }

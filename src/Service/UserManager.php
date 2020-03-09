@@ -168,11 +168,12 @@ class UserManager
     public function loadTokenizeableEntity(string $token): TokenizeableInterface
     {
         $payload = $this->manager->getPayload($token);
+        $userIdentifier = $payload['user'];
         /**
          * @var $user TokenizeableInterface
          */
         $user = $this->repository->findOneBy([
-            'email' => $payload,
+            'email' => $userIdentifier,
         ]);
         //TODO check this place, we initially decided to use email as inner token cause they're semi dynamic,
         // when implementing actual token replace this as well

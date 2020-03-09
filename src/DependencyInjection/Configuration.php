@@ -24,6 +24,9 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('user_class')->isRequired()
                 ->end()
+                ->scalarNode('expiry_duration')
+                    ->defaultValue('-1')
+                ->end()
             ->end();
 
 

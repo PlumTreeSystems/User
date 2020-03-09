@@ -30,6 +30,9 @@ services:
     pts_user.jwt.manager:
         public: true
         class: PlumTreeSystems\UserBundle\Service\JWTManager
+        arguments:
+            $secret: '%kernel.secret%'
+            $duration: '%pts_user_expiry_duration%'
 
     pts_user.security.checker:
         class: PlumTreeSystems\UserBundle\Security\UserChecker

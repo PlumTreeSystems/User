@@ -8,6 +8,8 @@
 
 namespace PlumTreeSystems\UserBundle\Service;
 
+use DateTime;
+use Exception;
 use PlumTreeSystems\UserBundle\Model\TokenizeableInterface;
 use PlumTreeSystems\UserBundle\Model\TokenManagerInterface;
 
@@ -15,17 +17,37 @@ class JWTManager implements TokenManagerInterface
 {
 
     private $alg = 'HS256';
+
     private $typ = 'JWT';
-    private $secret = '';
+
+    private $secret;
+
+    private $expiryDuration;
+
+    /**
+     * JWTManager constructor.
+     * @param string $secret
+     * @param string $expiryDuration
+     */
+    public function __construct(string $secret, string $expiryDuration)
+    {
+        $this->secret = $secret;
+        $this->expiryDuration = $expiryDuration;
+    }
 
     /**
      * Creates token from payload
      * @param TokenizeableInterface $user
      * @return string
+     * @throws Exception
      */
     public function createToken(TokenizeableInterface $user): string
     {
-        $payload = $this->encodeData($this->getHeader()).'.'.$this->encodeData($user->getToken());
+        $payloadData = [
+            'user' => $user->getToken(),
+            'expiresOn' => $this->getExpiryDate()
+        ];
+        $payload = $this->encodeData($this->getHeader()).'.'.$this->encodeData($payloadData);
         $signature = $this->encodeSignature($payload, $this->secret);
         return $payload.'.'.$signature;
     }
@@ -42,6 +64,43 @@ class JWTManager implements TokenManagerInterface
         }
         $signature = $this->encodeSignature($parts[0].'.'.$parts[1], $this->secret);
         return $signature === $parts[2];
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    private function getExpiryDate() {
+        $dur = $this->expiryDuration;
+        if ($dur !== '-1') {
+            $dateTime = new DateTime($dur);
+            return $dateTime->format(DateTime::ISO8601);
+        } else {
+            return '-1';
+        }
+    }
+
+    /**
+     * @param string $token
+     * @return bool
+     * @throws Exception
+     */
+    public function isExpired(string $token): bool
+    {
+        $payload = $this->getPayload($token);
+        if (key_exists('expiresOn', $payload)) {
+            if ($payload['expiresOn'] === '-1') {
+                return false;
+            }
+            $expiresOn = new DateTime($payload['expiresOn']);
+            $now = new DateTime();
+            $expiresOn = $expiresOn->getTimestamp();
+            $now = $now->getTimestamp();
+            if ($expiresOn < $now) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

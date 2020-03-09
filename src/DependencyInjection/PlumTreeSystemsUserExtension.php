@@ -25,5 +25,6 @@ class PlumTreeSystemsUserExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
         $container->setParameter('pts_user_class', $config['user_class']);
+        $container->setParameter('pts_user_expiry_duration', $config['expiry_duration']);
     }
 }
