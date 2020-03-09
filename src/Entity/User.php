@@ -127,6 +127,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
     {
         $this->setPassword('');
         $this->plainPassword = $plainPassword;
+        return $this;
     }
 
     /**
@@ -143,6 +144,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
     public function setDisabled(bool $disabled)
     {
         $this->disabled = $disabled;
+        return $this;
     }
 
 
@@ -185,6 +187,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
             }
         }
         $this->roles = json_encode($roles);
+        return $this;
     }
 
     public function addRole(string $role)
@@ -197,6 +200,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
         } else {
             throw new RoleDoesNotExistException();
         }
+        return $this;
     }
 
     /**
