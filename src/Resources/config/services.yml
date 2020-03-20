@@ -3,6 +3,7 @@ services:
     pts_user.create.command:
         class: PlumTreeSystems\UserBundle\Command\CreateUserCommand
         tags: ['console.command']
+        arguments: ['@pts_user.manager']
 
     pts_user.listener:
         class: PlumTreeSystems\UserBundle\Listener\UserListener
