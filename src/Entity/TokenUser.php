@@ -8,6 +8,7 @@
 
 namespace PlumTreeSystems\UserBundle\Entity;
 
+use DateTime;
 use PlumTreeSystems\UserBundle\Exception\TokenTypeDoesNotExistException;
 use PlumTreeSystems\UserBundle\Model\TokenizeableInterface;
 
@@ -25,7 +26,7 @@ abstract class TokenUser extends User implements TokenizeableInterface
     private $tempTokenType;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $tempTokenCreationDate;
     /**

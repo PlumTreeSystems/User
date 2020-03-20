@@ -122,6 +122,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $plainPassword
+     * @return User
      */
     public function setPlainPassword($plainPassword)
     {
@@ -140,6 +141,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
 
     /**
      * @param bool $disabled
+     * @return User
      */
     public function setDisabled(bool $disabled)
     {
@@ -171,7 +173,7 @@ abstract class User implements UserInterface, EquatableInterface, \Serializable
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return (Role|string)[] The user roles
+     * @return mixed (Role|string)[] The user roles
      */
     public function getRoles()
     {

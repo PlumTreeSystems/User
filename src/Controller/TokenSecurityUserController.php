@@ -8,6 +8,7 @@
 
 namespace PlumTreeSystems\UserBundle\Controller;
 
+use PlumTreeSystems\UserBundle\Entity\User;
 use PlumTreeSystems\UserBundle\Model\TokenizeableInterface;
 use PlumTreeSystems\UserBundle\Service\FormErrorExtractor;
 use PlumTreeSystems\UserBundle\Service\JWTManager;
@@ -44,6 +45,7 @@ class TokenSecurityUserController extends AbstractUserController
         $form->submit($request->request->all());
         if ($form->isValid()) {
             $email = $form->get('email')->getData();
+            /** @var User $user */
             $user = $userManager->loadUserByUsername($email);
             if ($user) {
                 try {

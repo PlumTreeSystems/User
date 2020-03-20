@@ -23,7 +23,7 @@ class FormErrorExtractor
              * @var FormInterface $child
              */
             if ($child->isSubmitted() && !$child->isValid()) {
-                $errors[$child->getName()] = $this->getErrorMessages($child);
+                $errors[$child->getName()] = self::getErrorMessages($child);
             }
         }
 
