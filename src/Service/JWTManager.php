@@ -20,7 +20,7 @@ class JWTManager implements TokenManagerInterface
 
     private $typ = 'JWT';
 
-    private $secret;
+    protected $secret;
 
     private $expiryDuration;
 
@@ -70,7 +70,7 @@ class JWTManager implements TokenManagerInterface
      * @return string
      * @throws Exception
      */
-    private function getExpiryDate() {
+    protected function getExpiryDate() {
         $dur = $this->expiryDuration;
         if ($dur !== '-1') {
             $dateTime = new DateTime($dur);
@@ -114,7 +114,7 @@ class JWTManager implements TokenManagerInterface
         return json_decode(base64_decode($parts[1]), true);
     }
 
-    private function getHeader()
+    protected function getHeader()
     {
         return [
             'alg' => $this->alg,
@@ -122,12 +122,12 @@ class JWTManager implements TokenManagerInterface
         ];
     }
 
-    private function encodeData($data): string
+    protected function encodeData($data): string
     {
         return base64_encode(json_encode($data));
     }
 
-    private function encodeSignature($data, $secret): string
+    protected function encodeSignature($data, $secret): string
     {
         return base64_encode(hash_hmac('sha256', $data, $secret));
     }
